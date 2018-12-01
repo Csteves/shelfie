@@ -11,6 +11,20 @@ module.exports = {
             console.log(err)
         })
     },
+    getOne: (req,res) => {
+        const dbInstance = req.app.get('db');
+        const {id} = req.params;
+        console.log(id)
+        dbInstance.read_product(id)
+        .then((product) => {
+            res.status(200).send(product)
+            console.log(product)
+        })
+        .catch((err) => {
+            res.status(500).send({errorMessage: "opps! Something went wrong."});
+            console.log(err)
+        });
+    },
     getAll: (req,res) => {
         console.log('hello from getall');
         const dbInstance = req.app.get('db');
@@ -23,9 +37,9 @@ module.exports = {
     update: (req,res) => {
         console.log("hello from update")
         const {id} = req.params;
-        const {name,price,image_url} = req.query;
+        const {name,price,image_url} = req.body.updated;
         const dbInstance = req.app.get('db');
-        dbInstance.update_product(id,desc)
+        dbInstance.update_product(id,name,price,image_url)
         .then(() => res.sendStatus(200))
         .catch(err => {
             res.status(500).send({errorMessage: 'Opps! Something went wrong.'});

@@ -13,6 +13,7 @@ massive(process.env.CONNECTION_STRING)
 }).catch(err => console.log(err));
 
 app.get('/api/products', prodCon.getAll )
+app.get('/api/products/:id', prodCon.getOne )
 app.put('/api/products/:id', prodCon.update )
 app.post('/api/products', prodCon.create )
 app.delete('/api/products/:id', prodCon.delete )

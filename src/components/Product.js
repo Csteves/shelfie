@@ -1,10 +1,11 @@
 import React  from 'react';
+import {Link} from 'react-router-dom';
 import './Product.css'
  export default function(props){
     return (
             <div className='product_container' >
             <div className='img_box' >
-                <img src={props.itemUrl} />
+                <img src={props.itemUrl} alt="product url" />
             </div>
             <div className='info_container'>
 
@@ -16,8 +17,12 @@ import './Product.css'
                 <div className="item_button_toolbar">
                     <button
                     onClick={()=> props.handleDelete(props.itemId)}
-                    >Delete</button>
-                    <button>Edit</button>
+                    >Delete
+                    </button>
+                    <Link to={`/form${props.itemId}`} >
+                        <button>Edit</button>
+                    </Link>
+
                 </div>
             </div>
 

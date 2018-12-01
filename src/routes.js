@@ -7,7 +7,9 @@ import Form from './components/Form'
 export default (
     <HashRouter>
         <Switch>/>
-            <Route path='/' component={Dashboard} exact />
+        <Route path='/' component={Dashboard} exact />
         <Route path='/form' component={Form}  />
+        <Route path='/form:id' component={Form}  />
+
         </Switch>
     </HashRouter>)

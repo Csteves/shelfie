@@ -42,9 +42,8 @@ export default class Dashboard extends Component {
             itemPrice={item.price}
             itemId={item.product_id}
             handleDelete={this.handleDelete}
+            item={item}
             />
-
-
         )
     })
     return (
