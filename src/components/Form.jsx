@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Link,Route} from 'react-router-dom';
+import {Link,Redirect} from 'react-router-dom';
 import './Form.css';
-import queryString from 'query-string';
-import Dashboard from './Dashboard'
 
 export default class Form extends Component {
   constructor(){
@@ -14,8 +12,8 @@ export default class Form extends Component {
       price: 0,
       image_url:"",
       isEditing:false,
-      currentId:null
-
+      currentId:null,
+      toDashboard:false
     }
     this.saveCreate = this.saveCreate.bind(this);
     this.handleInputs = this.handleInputs.bind(this);
@@ -73,6 +71,7 @@ export default class Form extends Component {
       image_url:''
     })
   }
+
   handleCreate(){
     const newItem = {
       name:this.state.name,
@@ -112,21 +111,25 @@ export default class Form extends Component {
            name:'',
            price:0,
            image_url:'',
+           toDashboard:true
         })
     })
 
 }
 
   render() {
-     const condButton = this.state.isEditing
-                      ?   <button
+  if (this.state.toDashboard === true){
+    return <Redirect to='/'/>;
+    }
+  const condButton = this.state.isEditing
+                        ? <button
                           onClick={() => this.saveUpdate()}
                           >
                           save edit
                           </button>
-                      : <button
-                        onClick={() => this.verifyInput()}
-                        >add to inventory</button>;
+                        : <button
+                          onClick={() => this.verifyInput()}
+                          >add to inventory</button>;
     return (
       <div className="main_container">
         <div className="image_container" >
@@ -165,7 +168,6 @@ export default class Form extends Component {
               </button>
             </Link>
             {condButton}
-
         </div>
       </div>
     )
